@@ -18,11 +18,7 @@ function toggleMobileMenu() {
 document.addEventListener('click', function (event) {
     const navbar = document.querySelector('header');
     const navLinks = document.getElementById('mobile-menu');
-    const hamburger = document.querySelector('.hamburger-menu'); // Note: I removed the class but the button has onclick.
-    // Actually the button is inside the header, so the contains check should still work if we target the header.
-
-    // We need to check if the click was NOT on the hamburger button and NOT on the menu itself.
-    // But since the button calls the toggle function, we just need to handle outside clicks.
+    const hamburger = document.querySelector('.hamburger-menu');
 
     if (!navbar.contains(event.target) && !navLinks.classList.contains('hidden')) {
         navLinks.classList.add('hidden');
@@ -33,7 +29,6 @@ document.addEventListener('click', function (event) {
 // Image Slider Simulation
 document.querySelectorAll('.img-wrapper').forEach(wrapper => {
     wrapper.addEventListener('mouseenter', () => {
-        // In a real app, logic to show arrows would go here
         console.log("Hovered card image");
     });
 });
@@ -236,13 +231,7 @@ document.getElementById('sort-select').addEventListener('change', function () {
     renderListings(sortedData);
 });
 
-// Update Image Slider Functions to work with data-id if needed, 
-// but the inline `onclick` passes the specific ID index (1-based from static).
-// To make it robust for filtering, we should probably stick to DOM index or specific ID logic.
-// The current logic uses `document.querySelectorAll('.card')[cardIndex - 1]`.
-// If we filter/sort, the DOM order changes, so 'cardIndex' relying on position 1,2,3,4 breaks if we sort.
-// We should update changeImage/goToImage to find the card by `data-id` or pass `event` context.
-// For now, to keep it simple and working with the provided static ID structure in the data:
+
 function changeImage(cardId, direction) {
     // Find card by data-id attribute to ensure it works after sorting
     const card = document.querySelector(`.card[data-id="${cardId}"]`);
